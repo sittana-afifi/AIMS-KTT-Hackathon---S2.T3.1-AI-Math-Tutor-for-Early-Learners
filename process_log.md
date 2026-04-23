@@ -31,5 +31,5 @@
 
 ## **3. Hardest Decision Made**
 
-The single hardest decision was the trade-off between **Input Resolution and Model Performance**. I initially considered dropping the input size from 224x224 to 128x128 to guarantee I would stay under the 10MB limit. However, initial tests showed a significant drop in the **Macro-F1 score for Maize Blight**, as the diagnostic features for that disease are very fine and small. I ultimately decided to keep the **224x224 resolution** to maintain medical accuracy and instead used **aggressive INT8 quantization** and layer pruning to hit the size target. This decision prioritized the farmer's diagnostic reliability over a simpler compression path.
+The primary dataset utilized did not contain the 'Bean Spot' class upon extraction. To maintain a functional 5-class architectural pipeline for the Hinga-AI classifier, I implemented a synthetic noise-injection strategy for the bean_spot class. This allows the model architecture and the USSD/API services to be fully verified, while noting that the model would require a specific 'Bean' fine-tuning pass once that specific leaf-set is procured."
 
