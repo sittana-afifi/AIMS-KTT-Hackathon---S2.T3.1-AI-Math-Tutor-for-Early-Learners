@@ -28,6 +28,9 @@
 - **Reason:** Discarded because the candidate brief explicitly states that the video must show "real understanding rather than LLM-generated narration." I decided to speak authentically about my code and trade-offs instead of using a script.
 
 ---
+### **Tech Aspect**
+
+Model Evaluation Strategy: Employed an 80/20 stratified split. Achieved [X]% accuracy on the unseen test set. Conducted additional 'Field Stress Tests' by applying digital noise to test images to simulate low-quality smartphone cameras used in Rwandan rural areas."
 
 ## **3. Hardest Decision Made**
 
