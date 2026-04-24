@@ -70,11 +70,16 @@ A 1-page visual report is generated for parents:
 
 ## 📂 Repository Structure
 ```text
-├── models/             # Quantized weights and BKT parameters
-├── tutor/              # Core modules: ASR, LLM, and Knowledge Tracing
-├── demo.py             # Gradio-based child interaction demo
-├── parent_report.py    # Visual/Audio report generation script
-├── requirements.txt    # Minimal dependencies for CPU inference
-├── process_log.md      # MANDATORY: Timeline and LLM usage declaration
-└── SIGNED.md           # Verbatim Honor Code signature
+├── data/                # Generated data script 
+├── models/              # Quantized weights and BKT parameters
+├── tutor/               # Core modules: ASR, LLM, and Knowledge Tracing
+├── demo.py              # Gradio-based child interaction demo
+├── parent_report.py     # Visual/Audio report generation script
+├── requirements.txt     # Minimal dependencies for CPU inference
+├── process_log.md       # MANDATORY: Timeline and LLM usage declaration
+├── SIGNED.md            # Verbatim Honor Code signature
+├── BUSINESS_STRATEGY.md # Product & Business adaptation
+├── LICENSE.md 
+├── README.md 
+└── .gitignore          
 
