@@ -1,37 +1,46 @@
-# 📈 Business Strategy: Project Hinga-AI
+# Business & Deployment Strategy: Mwenyura AI Math Tutor
 
-## 1. The Challenge: The Digital Last Mile
-While our disease classifier is technically optimized (<10MB), two barriers prevent its adoption by the average Rwandan farmer:
-* **Connectivity:** 4G/LTE coverage is inconsistent in deep rural districts.
-* **Hardware:** Only a small percentage of smallholder farmers own smartphones capable of running image-based diagnostics.
+## 1. Value Proposition
+Mwenyura AI ("To Smile") is a voice-first, offline math tutor designed to transform the stress of early numeracy into a joyful, successful experience for children aged 5-9.
+* **Offline-First Resilience:** Zero data-cost operation, making it accessible to the 60%+ of rural households without stable internet.
+* **Emotional Safety:** Onboarding in Kinyarwanda/local dialects ensures the child's first interaction with technology is a "smile" rather than a struggle.
+* **Adaptive Mastery:** Uses Knowledge Tracing to ensure tasks are neither too hard (causing frustration) nor too easy (causing boredom).
 
-## 2. Strategic Solution: "Human-in-the-Loop" Extension
-We address this by deploying a **Village Lead (VL) Model** coupled with a **USSD Fallback** system.
+---
 
-### **The Workflow**
-1. **The Diagnostic (High Tech):** Village Leads (trusted local youth or extension officers) use the smartphone app to perform field scans. The model runs **locally (Offline)** on their device.
-2. **The Sync:** When the lead reaches a zone with connectivity, the diagnostic results (Disease Class + GPS + Farm ID) are uploaded to the central database.
-3. **The Retrieval (Low Tech):** The individual farmer, regardless of their phone type, dials a shortcode (**`*123#`**) to view their farm's health status and treatment recommendations via SMS.
-
-## 3. USSD Menu Structure (*123#)
-Instead of data-heavy apps, farmers interact with the data via a zero-rated USSD menu:
-* **Option 1: Farm Health Report** -> *"Your Maize scan from 24/04 shows signs of Rust. Recommendation: Apply [Product] and isolate the plot."*
-* **Option 2: Treatment Marketplace** -> Direct link to purchase approved fertilizers/pesticides via Mobile Money.
-* **Option 3: Agronomist Call-Back** -> Request a physical visit if the AI detection confidence was low.
-
-## 4. Pilot Implementation & Unit Economics
-**Location:** 50 Pilot Farms in the Musanze District.
-
-| Item | Cost (RWF) | Frequency |
+## 2. Target Market & User Personas
+| Persona | Pain Point | Mwenyura AI Solution |
 | :--- | :--- | :--- |
-| **Agent Smartphone (Entry-level)** | 85,000 RWF | One-time |
-| **USSD Session Cost** | 0 RWF | Zero-rated via Govt Partnership |
-| **Agent Commission** | 500 RWF | Per successful farm scan |
+| **The Learner (Age 5-9)** | High anxiety regarding math and language instruction. | Friendly, high-contrast UI with voice-first "scaffolded" hints. |
+| **The Parent** | Limited formal education; inability to track school progress. | Visual, icon-based reports with an "Audio-Play" summary in the local language. |
+| **The Educator** | Large class sizes (50+ students) making 1-on-1 support impossible. | Acts as an "Assistant Teacher" that automates drills and identifies struggling students via Mastery Heatmaps. |
 
-**Sustainability:**
-* **Revenue Model:** Subscription-based for Cooperatives or a small commission on treatment sales facilitated through the USSD menu.
-* **Impact Goal:** Reduce crop loss due to Maize Blight/Rust by **25%** within the first harvest cycle.
+---
 
-## 5. Ethical Fairness & Reliability
-* **Class Weighting:** The algorithm is tuned to prioritize diseases with high contagion rates (like Cassava Mosaic) to trigger early warnings for the whole village.
-* **Human-in-the-Loop:** For any AI prediction with <70% confidence, the image is flagged for a remote agronomist to review before the SMS is sent to the farmer.
+## 3. Go-to-Market (GTM) Strategy: The "Circle of Learning"
+Instead of high-cost individual sales, we focus on high-impact community clusters:
+1. **The Shared Tablet Model:** Partner with local NGOs and school boards to deploy 1 tablet per 5 students. 
+2. **Community Lead Hubs:** Empower "Lead Mothers" or community elders to act as custodians of the devices, facilitating evening learning circles.
+3. **Hardware Bundling:** Pre-installing Mwenyura AI on low-spec, durable Android tablets (under $60) to provide a "Tutor-in-a-Box" solution.
+
+---
+
+## 4. Sustainability & Revenue Model
+Mwenyura AI operates as a **Hybrid Social Enterprise**:
+* **B2G (National Scale):** Per-student licensing fees paid by Ministries of Education as part of national digitalization programs.
+* **Impact Data API:** Providing anonymized, differentially-private numeracy data to global education researchers and NGOs to identify regional learning gaps.
+* **Freemium Tier:** A basic offline version remains free forever, while an urban "Pro" version (with cloud-backup and advanced English-prep modules) generates revenue to subsidize rural deployment.
+
+---
+
+## 5. Risk Mitigation & Ethics
+* **Privacy by Design:** To protect the "smiles" of our users, no biometric data (voice/face) leaves the device. Knowledge Tracing parameters are stored locally in an encrypted SQLite database.
+* **Bias Prevention:** ASR models are specifically fine-tuned on child-speech datasets to ensure the AI understands young voices and local accents equally.
+* **Cultural Grounding:** All mathematical word problems are localized—counting local fruits, livestock, or market items to ground abstract math in lived reality.
+
+---
+
+## 6. Scaling Roadmap
+* **Phase 1 (Pilot):** Deployment to 200 students in rural Rwanda to validate the BKT mastery update accuracy.
+* **Phase 2 (Regional Expansion):** Translating the scaffolding engine into Swahili, Luganda, and French to cover the EAC (East African Community).
+* **Phase 3 (Curriculum Depth):** Expanding beyond P3 numeracy into early science and literacy modules using the same adaptive logic.

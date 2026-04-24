@@ -1,7 +1,7 @@
-# AI Mwenyura - Adaptive Multilingual Math Tutor for Early Learners (P1-P3)
+# Mwenyura AI [ A smiling child is a learning child ] - An Adaptive Multilingual Math Tutor for Early Learners (P1-P3)
 
 ## 📌 Project Overview
-AI -Mwenyura is an on-device, offline EdTech solution designed for children aged 5-9 in low-resource settings. It provides personalized numeracy support (number recognition, counting, and basic operations) using adaptive intelligence. It specifically addresses the "language transition" hurdle for learners moving from Kinyarwanda/French to English instruction.
+Mwenyura AI is an on-device, offline EdTech solution designed for children aged 5-9 in low-resource settings. It provides personalized numeracy support (number recognition, counting, and basic operations) using adaptive intelligence. It specifically addresses the "language transition" hurdle for learners moving from Kinyarwanda/French to English instruction.
 
 ### Core Pillars
 * **Adaptive Learning:** Uses [BKT/DKT] Knowledge Tracing to adjust difficulty in real-time based on learner mastery.
