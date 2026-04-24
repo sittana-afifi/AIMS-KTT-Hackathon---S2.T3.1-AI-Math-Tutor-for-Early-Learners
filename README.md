@@ -1,105 +1,80 @@
-# 🌿 T2.1 Compressed Crop Disease Classifier
+# AI Mwenyura - Adaptive Multilingual Math Tutor for Early Learners (P1-P3)
 
-## **Project Overview**
-This repository provides a high-performance, edge-optimized Computer Vision model designed to diagnose crop diseases in rural, low-bandwidth environments. The system identifies five critical classes: **Healthy, Maize Rust, Maize Blight, Cassava Mosaic, and Bean Spot.**
+## 📌 Project Overview
+AI -Mwenyura is an on-device, offline EdTech solution designed for children aged 5-9 in low-resource settings. It provides personalized numeracy support (number recognition, counting, and basic operations) using adaptive intelligence. It specifically addresses the "language transition" hurdle for learners moving from Kinyarwanda/French to English instruction.
 
-The core differentiator of this solution is the balance between **model compression (<10MB)** and **field robustness**, ensuring accuracy even with noisy, motion-blurred images common in field diagnostics.
-
----
-
-## **🚀 Performance Metrics**
-| Metric | Result | Target |
-| :--- | :--- | :--- |
-| **Model Size (INT8 Quantized)** | **5.94 MB** | < 10 MB |
-| **Macro-F1 (Validation)** | **99.11%** | ≥ 80% |
-| **Macro-F1 (Field Test)** | **99.11%** | Robustness Check |
-| **Inference Latency** | **[Insert Latency, 282.93 ms]** | N/A |
+### Core Pillars
+* **Adaptive Learning:** Uses [BKT/DKT] Knowledge Tracing to adjust difficulty in real-time based on learner mastery.
+* **Edge AI Performance:** Fully quantized model suite running on CPU under a **75MB footprint**.
+* **Child-Centric UX:** Voice-first interaction adapted for child speech patterns with multilingual code-switching support.
+* **Privacy-First:** Local progress tracking with differentially private syncing for shared devices.
 
 ---
 
-## **📁 Project Structure**
-```text
-.
-├── data/
-│   ├── data_generator.ipynb                 # Dataset recipe and labels (gitignored images)
-├── models/
-│   ├── model_quantized.onnx # Final <10MB production model
-│   └── train.py            # Training & Quantization script
-├── service/
-│   ├── app.py              # FastAPI inference service
-│   └── Dockerfile          # Containerization for deployment
-├── samples/                # Sample field images for testing
-├── requirements.txt        # Production dependencies
-├── process_log.md          # Development timeline & tool declaration
-├── ussd_fallback.md        # Product design for non-smartphone users
-├── SIGNED.md               # Candidate Honor Code
-└── README.md               # Project documentation
-```
----
+## 🚀 Quick Start (Reproducibility)
+To run the tutor demo on a standard Colab CPU environment or local machine:
 
 
-## **🛠️ Technical Architecture**
+### 1. Install dependencies (Optimized for on-device CPU inference)
 
-### **1. Model Training & Compression**
-- **Base Architecture:** [e.g., MobileNetV3-Small] chosen for its efficiency on mobile CPUs and high accuracy-to-parameter ratio.
-- **Optimization:** Fine-tuned on `mini_plant_set` using Weighted Cross-Entropy to address class imbalance.
-- **Quantization:** Applied **Post-Training INT8 Quantization** to reduce the footprint significantly while meeting the 10MB budget.
-- **Format:** Exported to **ONNX** for high-speed, cross-platform inference on edge devices.
-
-### **2. Inference API**
-A **FastAPI** service serves the model via a single endpoint:
-- **`POST /predict`**: Accepts a JPEG/PNG image and returns:
-    - **Primary Diagnosis**: The predicted disease class.
-    - **Confidence Score**: Probability of the prediction.
-    - **Top-3 Alternates**: Other likely candidates.
-    - **Inference Latency**: Time taken for a single pass in milliseconds.
-
----
-
-## **📦 Deployment & Reproduction**
-
-### **Setup**
 ```bash
 pip install -r requirements.txt
 ```
-Run locally
+
+### 2. Launch the Gradio child-facing interface
 ```bash
-python service/app.py
+python demo.py
 ```
-Run via Docker
-```bash
-docker build -t crop-classifier .
-docker run -p 8000:8000 crop-classifier
-```
+
 ---
 
-# 🌍 Product & Business Adaptation: USSD Fallback Strategy
+## 📊 Technical Specifications & Footprint
+The system is strictly optimized to meet the **< 75MB** constraint for deployment on low-cost hardware.
 
-## **1. The Digital Divide Challenge**
-While our 10MB quantized model is designed for edge efficiency, many farmers in rural Rwanda still utilize feature phones (non-smartphones) or live in areas with zero data coverage. To ensure the intelligence of the **Crop Disease Classifier** reaches everyone, we implement a "Human-in-the-Loop" USSD extension.
+| Component | Choice | Optimization | Size (MB) |
+| :--- | :--- | :--- | :--- |
+| **LLM Engine** | TinyLlama-1.1B | GGUF 4-bit Quantization | ~XX MB |
+| **ASR (Voice)** | Whisper-Tiny | Adapted for Child Pitch | ~XX MB |
+| **Knowledge Tracing**| Bayesian Knowledge Tracing | Probabilistic Inference | < 1 MB |
+| **TOTAL** | | | **[Insert Total] MB** |
 
-## **2. The Workflow**
+* **Hardware Target:** CPU-only (No GPU required).
+* **Latency:** < 2.5s end-to-end response time on standard Colab CPU.
 
-### **Step A: The Village Agent (Smartphone User)**
-A local agricultural extension officer or "Village Lead" carries a low-cost smartphone containing the compressed model. 
-* They perform the physical scans of the crops.
-* The model runs locally on their device (Offline).
-* Results are cached until they reach a 2G/3G signal area.
+---
 
-### **Step B: Data Synchronization**
-Once the agent reaches connectivity, the diagnostic results (e.g., *Maize Rust detected at coordinates -1.94, 30.06*) are synced to the Ministry of Agriculture’s central database.
+## 🧠 Knowledge Tracing & Adaptive Logic
+The tutor tracks learner progress across three mastery nodes: **Number Recognition**, **Addition**, and **Subtraction**. 
 
-### **Step C: USSD Retrieval (`*123#`)**
-The individual farmer, using a basic feature phone, can access their farm's specific health data:
-1. **Dial `*123#`**: The farmer enters their National ID or Farm ID.
-2. **Menu Selection**: 
-    - 1: View Latest Diagnosis
-    - 2: Treatment Recommendations
-    - 3: Request Agronomist Visit
-3. **SMS Delivery**: The farmer receives a text message: *"AMAKURU! Your maize scan from Tuesday shows Rust. Please apply [Treatment Name] immediately. Avoid watering leaves directly."*
+* **Model Type:** Bayesian Knowledge Tracing (BKT).
+* **Evaluation:** Next-response correctness prediction achieved an **AUC of [Insert Score]**.
+* **Adaptation Strategy:** If mastery probability $P(L_n) < 0.7$, the tutor provides visual scaffolding; if $P(L_n) > 0.95$, it transitions the learner to the next complexity level or instruction language.
 
-## **3. Strategic Impact**
-- **Accessibility**: 100% community coverage, regardless of device ownership.
-- **Data-Driven Policy**: Real-time heatmaps of disease outbreaks (Maize Blight or Cassava Mosaic) allow for rapid government intervention.
-- **Low Cost**: USSD is zero-rated or extremely low-cost, removing the financial barrier of mobile data for the farmer.
+---
+
+## 🌍 Product & Business Adaptation
+### 1. The First 90 Seconds
+The onboarding starts with a friendly voice greeting in **Kinyarwanda** to reduce learner anxiety. The first task is a "non-punishing" counting exercise. If the child is silent for 10 seconds, the tutor provides a verbal "scaffolded hint" rather than an error message to encourage persistence.
+
+### 2. Community Deployment (Shared Tablets)
+Designed for the "1 tablet per 3 children" classroom model:
+* **Differential Privacy:** Local SQLite progress data is injected with Laplacian noise before any potential sync to protect individual learner identities.
+* **Profile Switching:** High-contrast visual avatars allow children to select their profile without needing to read text.
+
+### 3. Parent/Teacher Reporting
+A 1-page visual report is generated for parents:
+* **Low-Literacy Design:** Uses progress bars and agricultural icons (growth symbols) to represent academic progress.
+* **Audio Summary:** Includes a text-to-speech button that reads the child's strengths and areas for improvement in the local dialect.
+
+---
+
+## 📂 Repository Structure
+```text
+├── models/             # Quantized weights and BKT parameters
+├── tutor/              # Core modules: ASR, LLM, and Knowledge Tracing
+├── demo.py             # Gradio-based child interaction demo
+├── parent_report.py    # Visual/Audio report generation script
+├── requirements.txt    # Minimal dependencies for CPU inference
+├── process_log.md      # MANDATORY: Timeline and LLM usage declaration
+└── SIGNED.md           # Verbatim Honor Code signature
 
