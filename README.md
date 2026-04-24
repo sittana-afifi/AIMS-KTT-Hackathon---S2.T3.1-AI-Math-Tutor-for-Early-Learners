@@ -28,18 +28,38 @@ python demo.py
 
 ---
 
-## 📊 Technical Specifications & Footprint
-The system is strictly optimized to meet the **< 75MB** constraint for deployment on low-cost hardware.
 
+
+## Implementation & Materials Integration
+
+### 1. Data-Driven Logic (The "Seed" Folder)
+Instead of hardcoding questions, the system uses a **decoupled architecture** where the logic is separate from the content.
+* **`curriculum_seed.json`**: Integrated as a dynamic question bank. The system uses a **Key-Agnostic Loader** to normalize curriculum items, allowing for 12+ items across 5 sub-skills to be taught sequentially.
+* **`parent_report_schema.json`**: Used to map the **Teacher Dashboard**. Our reports provide standardized metrics (Mastery Probability, Learning Status) that align with global educational standards.
+* **`diagnostic_probes_seed`**: Integrated to calibrate the BKT engine, providing secondary verification of student knowledge.
+
+### 2. Efficiency & Hardware Optimization
 | Component | Choice | Optimization | Size (MB) |
 | :--- | :--- | :--- | :--- |
-| **LLM Engine** | TinyLlama-1.1B | GGUF 4-bit Quantization | ~XX MB |
-| **ASR (Voice)** | Whisper-Tiny | Adapted for Child Pitch | ~XX MB |
-| **Knowledge Tracing**| Bayesian Knowledge Tracing | Probabilistic Inference | < 1 MB |
-| **TOTAL** | | | **[Insert Total] MB** |
+| **LLM Engine** | TinyLlama-1.1B / Qwen-0.5B | GGUF 4-bit Quantization | ~350 MB |
+| **ASR (Voice)** | Whisper-Tiny | Adapted for Child Pitch | ~75 MB |
+| **Knowledge Tracing**| BKT (Bayesian) | Probabilistic Inference | < 1 MB |
+| **TOTAL** | | | **~426 MB** |
 
 * **Hardware Target:** CPU-only (No GPU required).
 * **Latency:** < 2.5s end-to-end response time on standard Colab CPU.
+
+### 3. ASR & Speech Processing (The "Ears")
+* **Model:** `openai/whisper-tiny` (39M parameters).
+* **Adaptation:** Optimized decoding to handle the higher pitch and varied tempo typical of early learners.
+* **Multilingual Mapping:** Integrated logic to support **Mozilla Common Voice (en, fr, rw)** and **DigitalUmuganda**. The system maps multilingual phonetic inputs to numerical truths (e.g., "Two", "Deux", "Kabiri" $\rightarrow$ `2`).
+
+
+
+### 4. Bayesian Knowledge Tracing (The "Brain")
+Our implementation moves beyond simple scoring by using **BKT Logic** to estimate the hidden state of child mastery.
+* **Parameters:** Tracks $P(L_0)$ (Initial Knowledge), $P(T)$ (Transition), $P(S)$ (Slip), and $P(G)$ (Guess).
+* **Adaptive Progression:** The system only advances the `curriculum_seed` index once the BKT mastery threshold ($> 0.80$) is met, ensuring the child stays in the **Zone of Proximal Development (ZPD)**.
 
 ---
 
