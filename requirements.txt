@@ -1,0 +1,8 @@
+llama-cpp-python==0.2.76
+faster-whisper==1.0.3
+gradio==4.19.2
+librosa==0.10.1
+soundfile==0.12.1
+numpy==1.26.4
+scipy
+huggingface_hub

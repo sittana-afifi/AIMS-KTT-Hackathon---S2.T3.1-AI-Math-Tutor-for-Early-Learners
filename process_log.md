@@ -12,6 +12,13 @@
 
 ---
 
+## Tech Aspect
+
+* We chose Q2/Q3 quantization specifically to meet the Tier 3 footprint requirement.
+
+---
+
+
 ## 🤖 LLM & Assistant Tool Declaration
 
 I utilized **Gemini (Google)** as a coding assistant for the following technical tasks:
